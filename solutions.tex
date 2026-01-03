@@ -1,0 +1,32 @@
+\documentclass[12pt]{article}
+
+\usepackage{fancyhdr}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{tikz-cd}
+\usepackage{MnSymbol}
+
+\newcommand{\exercise}[1]{\noindent {\bf Exercise #1.}}
+
+\begin{document}
+\section*{Chapter 8}
+
+\exercise{3.2} If $f : R \to S$ is a ring homomorphism and $M, N$ are $S$-modules (hence $R$-modules by restriction of scalars), prove there is a canonical homomorphism of $R$-modules $M \otimes_{R} N \to M \otimes_{S} N$.
+
+{\bf Step where $\varphi(rm, n) = \varphi(f(r)m, n)$ seems wrong.}
+
+\begin{proof}
+    Let $\varphi : M \times N \to M \otimes_{S} N$ be defined by $\varphi(m, n) = m \otimes_{S} n$.  $\varphi$ is an $R$-bilinear map: \[  \varphi(rm, n) = \varphi(f(r)m, n) = f(r)m \otimes_{S}n = m \otimes_{S} f(r)n = \varphi(m, f(r)n) = \varphi(m, rn) \]
+
+    Therefore there is a unique $\psi$ making the following diagram commute; $\psi$ is the required canonical homomorphism between $M \otimes_{R} N$ and $M \otimes_{S} N$.
+\[
+    \begin{tikzcd}
+        M \times N \arrow[r, "\varphi"] \arrow[d, "\otimes"] & M \otimes_{S} N \\
+        M \otimes_{R} N \arrow[ur, "\exists ! \psi"]
+    \end{tikzcd}
+\]
+\end{proof}
+
+\end{document}
