@@ -8,19 +8,351 @@
 \usepackage{tikz-cd}
 \usepackage{MnSymbol}
 
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
 \newcommand{\exercise}[1]{\noindent {\bf Exercise #1.}}
+\newcommand{\polyring}[3]{#1[#2_1,\ldots#2_#3]}
+\newcommand{\tensor}[1]{\otimes_{#1}}
+\newcommand{\kernel}[0]{\text{ker}\,}
+\newcommand{\cokernel}[0]{\text{coker}\,}
+\newcommand{\image}[0]{\text{img}\,}
+\newcommand{\rank}[0]{\text{rk}\,}
 
 \begin{document}
+
+\section*{Chapter 3}
+
+\exercise{7.1} Assume that the complex
+\[
+    \begin{tikzcd}
+        \ldots \arrow[r] & 0 \arrow[r] & M \arrow[r] & 0 \arrow[r] & \ldots
+    \end{tikzcd}
+\]
+is exact.  Prove $M \cong 0$.
+
+\begin{proof}
+    Let $\varphi$ be the map out of $M$; the complex being exact at $M$ means $\varphi$ is injective; there $M \cong 0$.
+% \[
+%     \begin{tikzcd}
+%         \ldots \arrow[r] & 0 \arrow[r] & M \arrow[r, "\varphi"] & 0 \arrow[r] & \ldots
+%     \end{tikzcd}
+% \]
+\end{proof}
+
+\exercise{7.2} Assume that the complex
+\[
+    \begin{tikzcd}
+        \ldots \arrow[r] & 0 \arrow[r] & M \arrow[r] & M' \arrow [r] & 0 \arrow[r] & \ldots
+    \end{tikzcd}
+\]
+is exact.  Prove $M \cong M'$.
+
+\begin{proof}
+    Let $\psi$ be the map between $M$ and $M'$ and $\varphi$ be the map out of $M'$.  Since the complex is exact, $\image \psi \cong M / {0}$ and $\image \psi \cong \kernel \varphi = M'$; thus $M \cong M'$.
+\[
+    \begin{tikzcd}
+        \ldots \arrow[r] & 0 \arrow[r] & M \arrow[r, "\psi"] & M' \arrow [r, "\varphi"] & 0 \arrow[r] & \ldots
+    \end{tikzcd}
+\]
+
+\end{proof}
+
+\exercise{7.3} Assume that the complex
+\[
+    \begin{tikzcd}
+        \ldots \arrow[r] & 0 \arrow[r] & L \arrow[r] & M \arrow[r, "\varphi"] & M' \arrow [r] & N \arrow[r] & 0 \arrow[r] & \ldots
+    \end{tikzcd}
+\]
+is exact.  Show that up to natural identification $L = \kernel \varphi$ and $N = \cokernel \varphi$.
+
+\begin{proof}
+    TODO
+%     Take $f$ to be the map out of $L$; as the sequence is exact, $\image(f) = \kernel \varphi = L$ (inside $M$).
+% \[
+%     \begin{tikzcd}
+%         \ldots \arrow[r] & 0 \arrow[r] & L \arrow[r, "f"] & M \arrow[r, "\varphi"] & M' \arrow [r] & N \arrow[r] & 0 \arrow[r] & \ldots
+%     \end{tikzcd}
+% \]
+
+\end{proof}
+
+\section*{Chapter 6}
+
+\exercise{1.1} Show that $\C$ and $\R$ are isomorphic as $\Q$-vector spaces.
+
+\begin{proof}
+    Both $\C$ and $\R$ are infinite dimensional vector spaces over $\Q$; any basis must be uncountable with cardinality $2^{\aleph_0}$ (otherwise we could express every real number as a finite sum of a countable basis elements and so $\R$ would be a countable set).  Take any isomorphism $\psi$ between $\C$ and $\R$ as sets with $\psi(0) = 0$ and $\psi(x) = -x$ - these exist but are non-constructible; then $\psi$ maps the basis of $\C$ into the basis of $\R$ and they are isomorphic as $\Q$-modules.
+\end{proof}
+
+\exercise{1.2} Prove that the sets listed in Exercise III.1.4 are all $\R$-vector spaces, and compute their dimension.
+
+\begin{enumerate}
+    \item $\mathfrak{sl}_{n}(\R)$ - $n \times n$ matrices over $\R$ with trace 0
+    \item $\mathfrak{sl}_{n}(\C)$ - $n \times n$ matrices over $\C$ with trace 0
+    \item $\mathfrak{so}_{n}(\R)$ - $n \times n$ matrices over $\R$ with $M M^{t} = I$
+    \item $\mathfrak{su}(n)$ - $n \times n$ matrices over $\C$ with $M M^{t} = I$
+\end{enumerate}
+
+\begin{proof}
+TODO
+\end{proof}
+
+\exercise{1.5} Let $R$ be an integral domain.  Prove or disprove the following:
+
+{\bf False}: {\it Every linearly independent subset of a free $R$-module may be completed to a basis.}
+
+\begin{proof}
+    Let $R = \Z$ and take the subset \{2\}; this cannot be completed to a basis.
+\end{proof}
+TODO
+
+\exercise{1.13} Let $A$ be an abelian group such that $\text{End}_{Ab}(A)$ is a field of characteristic 0.  Prove that $A \cong \Q$.
+
+\begin{proof}
+    Since the endomorphism ring of $A$ is a field, every endomorphism $\varphi$ has an inverse $\varphi^{-1}$.
+
+    Every abelian group is a $\Z$-module via $na = \underbrace{n + \ldots + n}_{n \text{ times}}$.  Call this $\varphi_{n}$; then $\varphi_{n}$ is an endomorphism of $A$ and so has an inverse $\varphi_{1/n}$.  $A$ then is a $\Q$ vector space by $\frac{p}{q} a = \varphi_{p}\varphi_{1/q}a$.
+
+    The dimension of this module must equal 1; otherwise we would have non-zero endomorphisms $\psi$ of $A$ with $\ker{\psi} = 0$ (set everything except the first dimension to 0).  These endomorphisms would not have an inverse, contradicting the endomorphism ring being a field.  Therefore $A$ is a $\Q$ vector space with dimension 1 and so $A \cong \Q$.
+\end{proof}
+
+\exercise{1.14} Let $V$ be a finite dimensional vector space and $\varphi : V \to V$; show that there exists an $N$ such that $\kernel \varphi^{n + 1} = \kernel \varphi^{n}$ and $\image \varphi^{n+1} = \image \varphi^n$.
+
+\begin{proof}
+    Say $V$ is a finite dimension vector space over a field $k$.  We rely on the following:
+
+    {\bf Claim 1:} Any two vector spaces of the same dimension over $k$ are isomorphic.
+
+    {\bf Claim 2:} Let $V$ have finite dimension; then $\text{dim}\,\varphi(V) \le \text{dim}\,V$.
+
+    Given these claims, applying $\varphi$ to $V$ either maintains the dimension of $V$ (giving an isomorphic image and so $\ker \varphi = 0$) or strictly reduces the dimension of $V$, a non-negative integer.  As $V$ has finite dimension applying up to $\varphi$ $\text{dim}\,V$ times will stabilize the kernel to 0 and the image to some finite dimensional subspace of $V$.  (Note the kernel is strictly 0 so that the images are strictly equal, vs just being isomorphic.)
+
+    {\bf Proof of Claim 1:} Let $V, V'$ be vector spaces over $k$ with dimension $n$, with $e_i$ be a basis for $V$ and $f_i$ be a basis for $V'$.  Let $\psi : V \to V'$ be defined by $\psi(e_i) = f_i$; then $\psi$ is surjective (since $f_i$s are a basis of $V'$).  Suppose $\psi(v) = 0$; then $\sum \psi(k_i e_i) = \sum k_i\psi(e_i) = \sum k_i f_i = 0$; as the $f_i$ are linearly independent each of the $k_i$s must be 0, therefore $v = 0$ and $\psi$ is injective.  Therefore $\psi$ is an isomorphism.
+
+    {\bf Proof of Claim 2:} A linearly dependent set of vectors is mapped by any endomorphism of vector spaces to a linearly dependent set of vectors, so the dimension under the mapping can't increase or become infinite.
+
+    We provide a counterexample for infinite-dimensional vector spaces.  Take the vector space $k^{\oplus \N}$ and let $\varphi(\langle v_0, v_1, \ldots \rangle) = \langle v_1, v_2, \ldots \rangle$.  Then any finite number of applications of $\varphi$ has a non-trivial (but non-equal) kernel and image for any $\varphi^{k}$ and $\varphi^{k + 1}$.
+\end{proof}
+
+\exercise{1.15}
+    Say $R$ is an integral domain that is not a field and let $F$ be a free module of finite rank.  What property of $R$ immediately guarantees $\ker \varphi^{n + 1} = \ker \varphi^{n}$ for some $n > 0$?
+
+    \begin{proof}
+        {\bf Claim:} If $\rank F = \rank \varphi(F)$, then $\kernel \varphi = 0$.
+
+        {\bf Proof of Claim:} Let $x \in \kernel \varphi$
+    \end{proof}
+
+    Show that there is an $R$-module homomorphism $\varphi : F \to F$ such that $\image \varphi^{n+1} \subsetneqq \image \varphi^{n}$ for all $n > 0$.
+\begin{proof}
+
+\end{proof}
+
 \section*{Chapter 8}
+
+\exercise{2.1} Let $M, N$ be $R$-modules and assume $N$ is cyclic.  Prove every element of $M \otimes_{R} N$ may be written as a pure tensor.
+
+\begin{proof}
+% Let N be generated by a, so every n \in N = ar for some r in $R$.
+% Any element of the tensor product is a sum of simple tensors,
+% e.g. finite sum r_i (m_i \otimes n_i)
+% Every n_i = ar for some r in $R$, so = finite sum r_i' (m_i \otimes a) (factor out the r from each n_i)
+% This = (r_i' m_i \otimes a) QED.
+Every element of $M \otimes_{R} N$ has the form $\sigma_{i} r_i(m_i \otimes_{R} n_i)$ with $m_i \in M, n_i \in N$; since $N$ is cyclic, every $n_i \in N$ can be written as $r'_i a$ for $a \in N$.  Therefore
+\begin{eqnarray*}
+    \sigma_{i} r_i(m_i \otimes_{R} n_i) &=& \sigma_{i} r_i(m_i \otimes_{R} r_i' a) \\
+                                    &=& \sigma_{i} r_i r_i'(m_i \otimes_{R} a) \\
+                                    &=& (\sigma_{i} r_i r_i' m_i) \otimes_{R} a
+\end{eqnarray*}
+
+Since $M$ is an $R$-module, each finite sum $r_i r_i' m_i \in M$, so every element of $M \otimes_{R} N$ is a pure tensor.
+\end{proof}
+
+\exercise{2.2} Prove "by hand" that $\Z / n\Z \otimes_{\Z} \Z / m\Z \cong 0$ if $gcd(m, n) = 1$.
+
+\begin{proof}
+For any pure tensor, $x \otimes 0 = x \otimes (0 + 0) = x \otimes 0 + x \otimes 0$, therefore $x \otimes 0 = 0$.
+
+Since $gcd(m, n) = 1$, $m$ has a multiplicative inverse in $\Z / n\Z$ and $n$ has a multiplicative inverse in $\Z / m\Z$.  Therefore given $x \in \Z / n\Z$, $y \in \Z  / m\Z$:
+\begin{eqnarray*}
+        x \otimes_{\Z} y &=& (m \cdot m^{-1} \cdot x) \otimes_{\Z} (n \cdot n^{-1} \cdot y) \\
+                         &=& (n \cdot m^{-1} \cdot x) \otimes_{\Z} (m \cdot n^{-1} \cdot y) \\
+                         &=& (m^{-1} \cdot n \cdot x) \otimes_{\Z} (n^{-1} m \cdot \cdot y) \\
+                         &=& (m^{-1} \cdot 0) \otimes_{\Z} (n^{-1} \cdot 0) \\
+                         &=& 0 \otimes_{\Z} 0 = 0
+\end{eqnarray*}
+All pure tensors are 0, therefore the tensor product is the 0 $\Z$-module.
+\end{proof}
+
+\exercise{2.3} Prove that \[ \polyring{R}{x}{n} \otimes_{R} R[y_1,\ldots,y_n] \cong R[x_1,\ldots,x_n,y_1,\ldots,y_m] \]
+
+\begin{proof}
+Let $f \in \polyring{R}{x}{n}$, $g \in \polyring{R}{y}{m}$.  Define $j : \polyring{R}{x}{n} \otimes \polyring{R}{y}{m} \to R[x_1,\ldots,x_n,y_1,\ldots,y_m]$ by $j(f, g) = fg$; we show $j$ is bijective and surjective and so an isomorphism.
+
+This map is well-defined:
+\[ j((x_i^k + f) \otimes g) = (x_i^k + f)(g) = x_i^k g + fg = j(x_i^k \otimes g) + j(f \otimes g) = j((x_i^k + f) \otimes g) \]
+and similarly
+\[ j(f \otimes (y_i^k + g)) = f y_i^k + fg = j(f \otimes y_i^k) + j(f \otimes g) = j(f \otimes (y_i^k + g)) \]
+and is $R$-linear:
+\[ j(rf \otimes g) = rfg = rj(f \otimes g) \]
+
+It is injective; if $fg = 0$ then consider $f \otimes g$; splitting the polynomials to reducing to monomials and grouping terms, $f \otimes g = \sum_{i} r_i (\prod_{k} x_k) \otimes (\prod_{k} y_k)$; if each monomial is $0$ in the polynomial ring, each $r_i = 0$, so $f \otimes g = 0$.
+
+It is surjective: given $h \in R[x_1,\ldots,x_n,y_1,\ldots,y_m]$, $h$ can be written as the sum of monomials; each monomial is mapped to by the pure tensor pulling all $x_i$s to the left and all $y_j$s to the right.
+\end{proof}
+
+\exercise{2.4} Let $S, T$ be commutative $R$-algebras.  Verify the following:
+
+TODO (straightforward)
+
+\exercise{2.5} Let $S$ be a multiplicative subset of $R$, and $M$ be an $R$-module. Prove that $S^{-1}M \cong M \otimes_{R} S^{-1}R$ as $R$-modules.
+
+\begin{proof}
+    Let $\psi : M \times S^{-1}R \to P$ be a bilinear map.  Define $j : M \times S^{-1} \to S^{-1}M$ by $j(m, r/s) = mr/s$ and $\psi' : S^{-1}M \to P$ by $\psi'(m/s) = \psi(m, 1/s)$.  ($\psi'$ is an $R$-module homomorphism by the bilinearity of $\psi$.)
+    Then
+    \begin{eqnarray*}
+        (\psi' \circ j) (m, r/s) &=& \psi'(mr/s) \\
+                               &=& \psi(mr, 1/s) \\
+                               &=& r\psi(m, 1/s) \\
+                               &=& \psi(m, r/s)
+    \end{eqnarray*}
+
+    By the universal property of the tensor product, $S^{-1}M \cong M \otimes_{R} S^{-1}R$.
+
+    % This shows the following diagram commutes:
+    % \begin{tikzcd}
+    %      M \times S^{-1}R \arrow[r, "\psi"] \arrow[d, "j"] & P \\
+    %      S^{-1}M \arrow[ur, "\exists ! \psi'"]
+    %  \end{tikzcd}
+\end{proof}
+
+\exercise{2.7} Changing the base ring in a tensor may or may not make a difference:
+
+Prove that $\Q \otimes_{\Z} \Q \cong \Q \otimes_{\Q} \Q$.
+
+\begin{proof}
+    Clearly a $\Q$-bilinear map is a $\Z$-bilinear map: move only the numerators.
+
+    For the other direction, let $\psi : \Q \times \Q \to P$ by a $\Z$-bilinear map; given $p \otimes q \in \Q \otimes_{\Z} \Q$, \[ (m/n)q \otimes_{\Z} p  = (q/n) \otimes_{\Z} mp = (q/n) \otimes_{\Z} (n/n)(mp) = q \otimes_{\Z} (m/n)p \]
+    Therefore, $\psi$ is a $\Q$-bilinear map and $\Q \otimes_{\Z} \Q \cong \Q \otimes_{\Q} \Q$.
+\end{proof}
+
+Prove that $\C \otimes_{\R} \C \not\cong \C \otimes_{\C} \C$.
+
+\begin{proof}
+    $\C \cong \R \oplus \R$ (as a 2-dimensional vector space with scalars in $\R$); so
+    \[ \C \otimes_{\R} \C \cong \C \otimes_{\R} (\R \oplus \R) \cong (\C \otimes_{R} \R) \oplus (\C \otimes_{R} \R) \cong \C \oplus \C = \C \times \C \]
+    However, $\C \otimes_{\C} \C \cong \C$: $s \otimes t = s \otimes (s/s)t = 1 \otimes (s/t)$ so the tensor product is a single copy of $\C$; these rings are not isomorphism as they have different dimension.
+\end{proof}
+
+\exercise{2.9} Let $G$ be a finitely generated abelian group of rank $r$.  Prove that $G \otimes_{\Z} \Q \cong \Q^{r}$.
+
+\begin{proof}
+    We first prove two basic results allowing us to manipulate the group decomposition.
+
+    {\bf Lemma 1:} $\Q \otimes_{\Z} \Z \cong \Q$: $\Q$ is a $\Z$-module so tensoring it over $\Z$ is just the module (Example 2.2).
+    % let $\psi : \Q \otimes_{\Z} \Z \to \Q$ be defined on pure tensors as $\psi(q \otimes_{\Z} n) = qn$.  Then $\psi$ is an isomorphism: clearly surjective (any $q \in \Q$ is mapped to by $q \otimes_{\Z} 1$), clearly injective (if $qn = 0$ then either $n = 0$ or $q = 0$, so $q \otimes_{\Z} n = 0$).
+
+    {\bf Lemma 2:} $\Q \otimes_{\Z} \Z/m\Z \cong 0$: $q \otimes_{\Z} n = q(n/n) \otimes_{\Z} n = q/n \otimes_{\Z} 0 = 0$, so each pure tensor is identically zero.
+
+    By the structure theorem for finitely generated abelian groups, \[ G \cong \Z^{r} \oplus \Z/q_1\Z + \cdots + \Z/q_n\Z \]
+    Tensoring with $\Q$ gives:
+    \begin{eqnarray*}
+        G \tensor{\Z} \Q &\cong& (\Z^{r} \oplus \Z/q_1\Z \oplus \cdots \oplus \Z/q_n\Z) \tensor{\Z} \Q \\
+                         &\cong& (\Z^{r} \tensor{\Z} \Q) \oplus (\Z/q_1\Z \tensor{\Z} \Q) \oplus \cdots \oplus (\Z/q_n\Z \tensor{\Z} \Q) \\
+                         &\cong& (\bigoplus_{i=1}^{r} \Z) \tensor{\Z} \Q \\
+                         &\cong& \Q^r
+    \end{eqnarray*}
+\end{proof}
+
+Prove that for infinitely primes $p$, $G \otimes_{\Z} \Z/p\Z \cong (\Z/p\Z)^{r}$.
+
+\begin{proof}
+$\Z \tensor{\Z} (\Z/p\Z) \cong \Z/p\Z$ by Example 2.2 (tensoring an $R$-module with $R$ is equal to that $R$-module), and by Exercise 2.2, $(\Z/p\Z) \tensor{\Z} (\Z/q\Z) \cong 0$ for distinct primes $p, q$.
+
+Therefore for any $p \not\in \{q_1,\ldots,q_n\}$ we have:
+    \begin{eqnarray*}
+        G \tensor{\Z} (\Z/p\Z) &\cong& (\Z^{r} \oplus \Z/q_1\Z \oplus \cdots \oplus \Z/q_n\Z) \tensor{\Z} (\Z/p\Z) \\
+                         &\cong& (\Z^{r} \tensor{\Z} \Z/p\Z) \oplus (\Z/q_1\Z \tensor{\Z} \Z/p\Z) \oplus \cdots \oplus (\Z/q_n\Z \tensor{\Z} \Z/p\Z) \\
+                         &\cong& (\bigoplus_{i=1}^{r} \Z) \tensor{\Z} \Z/p\Z \\
+                         &\cong& (\Z/p\Z)^r
+    \end{eqnarray*}
+\end{proof}
+
+\exercise{2.14} Prove that, according to the definition given in \S 2.4 \[ \text{Tor}^{R}_0(M, N) = M \otimes_{R} N \]
+
+\begin{proof}
+Take a resolution of $M$; then the following is exact:
+\[
+\begin{tikzcd}
+    \cdots \arrow[r] & R^{\oplus S_1} \arrow[r, "\psi"] & R^{\oplus S_0} \arrow[r, "\varphi"] & M \arrow[r] & 0
+\end{tikzcd}
+\]
+We extract an exact sequence from this:
+\[
+\begin{tikzcd}
+    0 \arrow[r] & \kernel \psi \arrow[r] & R^{\oplus S_1} \arrow[r, "\psi"] & R^{\oplus S_0} \arrow[r, "\varphi"] & M \arrow[r] & 0
+\end{tikzcd}
+\]
+Tensoring with $N$ gives the following exact sequence:
+\[
+\begin{tikzcd}
+    \kernel \psi \otimes_{R} N \arrow[r] & N^{\oplus S_1} \arrow[r, "1 \otimes \psi"] & N^{\oplus S_0} \arrow[r, "1 \otimes \varphi"] & M \otimes_{R} N \arrow[r, "0"] & 0
+\end{tikzcd}
+\]
+
+Therefore: \[ \text{Tor}^{R}_0(M, N) = \kernel (0 \circ (1 \otimes \varphi)) / \image(1 \otimes \psi) = \cokernel (1 \otimes \psi) = M \otimes N \]
+
+\end{proof}
+
+\exercise{2.15} Prove that for $r \in R$ a non-zero divisor and $N$ an $R$-module, the module $\text{Tor}^{R}_{1}\,(R/(r), N)$ is isomorphic to the $r$-torsion of $N$, that is the submodule of elements $n \in N$ such that $rn = 0$.  (This is the reason $\text{Tor}$ is called $\text{Tor}$).
+
+\begin{proof}
+Take a resolution of $R/(n)$:
+\[
+\begin{tikzcd}
+    0 \arrow[r] & R \arrow[r, "r"] & R \arrow[r, "\sim / (r)"] & R / (r) \arrow[r] & 0
+\end{tikzcd}
+\]
+Tensoring with $N$ gives the following exact sequence:
+\[
+\begin{tikzcd}
+    \text{Tor}^{R}_{1}\,(R/(r), N) \arrow[r] & N \arrow[r, "r"] & N \arrow[r, "\sim / (r)"] & N / (r)N \arrow[r] & 0
+\end{tikzcd}
+\]
+As this is exact, $a \in \text{Tor}^{R}_{1}\,(R/(r), N)$ if and only if $a$ is in the kernel of multiplying by $r$; that is, if $ar = 0$.
+\end{proof}
 
 \exercise{3.2} If $f : R \to S$ is a ring homomorphism and $M, N$ are $S$-modules (hence $R$-modules by restriction of scalars), prove there is a canonical homomorphism of $R$-modules $M \otimes_{R} N \to M \otimes_{S} N$.
 
-{\bf Step where $\varphi(rm, n) = \varphi(f(r)m, n)$ seems wrong.}
+% \begin{proof}
+%     Let $\psi$ be the map making $M \times N$ an $R$-module by $rm = f(r)m, rn = f(r)n$.  $\psi$ is a $R$-bilinear map and so factors through $M \otimes_{R} N$.
+
+%     Of course, $M \times N$ still be interpreted as an $S$-module as we already know how to interpret multiplication by $S$; $\otimes_{S} \circ f' : M \otimes_{R} N \to M \otimes_{S} N$ is the required homomorphism.
+
+%     \begin{tikzcd}
+%         \overbrace{M \times N}^{\text{$S$-modules}} \arrow[r, "f"] \arrow[d] &
+%         \overbrace{M \times N}^{\text{$R$-module}} \arrow[d, "\otimes_{S}"] \arrow[r, "id"] &
+%         \overbrace{M \times N}^{\text{$S$-modules}} \\
+%         M \otimes_{R} N \arrow[ur, "\exists !f'"] &
+%         M \otimes_{S} N \arrow[ur]
+%     \end{tikzcd}
+
+
+% \end{proof}
+
+% Step where $\varphi(rm, n) = \varphi(f(r)m, n)$ seems wrong.  We must use the
+% universal property of the tensor product.
+% Better approach seems something like M x N (S) module -> M x N (R) module by restriction of scalars
+% No no, M x N is not an S module, that is the whole point of the tensor product.
 
 \begin{proof}
-    Let $\varphi : M \times N \to M \otimes_{S} N$ be defined by $\varphi(m, n) = m \otimes_{S} n$.  $\varphi$ is an $R$-bilinear map: \[  \varphi(rm, n) = \varphi(f(r)m, n) = f(r)m \otimes_{S}n = m \otimes_{S} f(r)n = \varphi(m, f(r)n) = \varphi(m, rn) \]
+    Let $\varphi : M \times N \to M \otimes_{S} N$ be defined by $\varphi(m, n) = m \otimes_{S} n$.  $\varphi$ is an $R$-bilinear map, with multiplication by $r$ interpreted in $S$ by $f(r)$: \[  \varphi(rm, n) = \varphi(f(r)m, n) = f(r)m \otimes_{S}n = m \otimes_{S} f(r)n = \varphi(m, f(r)n) = \varphi(m, rn) \]
 
-    Therefore there is a unique $\psi$ making the following diagram commute; $\psi$ is the required canonical homomorphism between $M \otimes_{R} N$ and $M \otimes_{S} N$.
+    Therefore there is a unique $\psi$ making the following diagram commute; $\psi$ is our canonical homomorphism between $M \otimes_{R} N$ and $M \otimes_{S} N$.
 \[
     \begin{tikzcd}
         M \times N \arrow[r, "\varphi"] \arrow[d, "\otimes"] & M \otimes_{S} N \\
