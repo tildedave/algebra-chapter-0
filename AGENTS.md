@@ -1,0 +1,74 @@
+# AGENTS.md
+
+Guidance for AI assistants (Claude and others) working in this repository.
+
+## What this repo is
+
+Solutions to exercises from Aluffi's *Algebra: Chapter 0*, written by hand in
+`solutions.tex` (compiled to `solutions.pdf`). We are beginning to formalize
+some of these solutions in Lean 4 (with Mathlib).
+
+The Lean project lives in `algebra-chapter-0/`:
+
+- `lakefile.toml`, `lean-toolchain`: Lean and Mathlib versions are pinned
+  (currently `v4.35.0`). `autoImplicit` is off.
+- `AlgebraChapter0.lean`: the library root, which imports every module.
+- `AlgebraChapter0/`: the formalized solutions.
+
+Run Lean commands from inside `algebra-chapter-0/`: `lake build` builds
+everything, and `lake env lean AlgebraChapter0/<File>.lean` checks a single
+file.
+
+## How we work together
+
+**The human drives.** I write most of the Lean myself in VSCode. The point of
+this project is for me to learn by doing the formalization, so the assistant is
+a helper I call on when I'm stuck, not the primary author.
+
+When I ask for help:
+
+- **Scope tightly.** Work on the specific `sorry`, lemma, or error I point to.
+  Don't rewrite surrounding proofs, rename things, restructure files, or
+  "clean up" code I didn't ask about.
+- **Keep my statements fixed.** Don't change a theorem's statement to make it
+  easier to prove. If you think the statement is wrong or awkwardly phrased,
+  say so and explain why, and let me decide.
+- **Explain the proof, not just the tactics.** Briefly say what the key idea
+  is, which Mathlib lemmas you used and why, and how it lines up with the
+  informal argument in `solutions.tex`. A short explanation beats a long one.
+- **Prefer readable proofs.** Favor structured proofs (`have`, `obtain`,
+  `calc`, `constructor`) that mirror the paper argument over opaque one-liners.
+  Using `simp`, `aesop`, `omega`, `ring`, `linarith`, etc. is fine. If a
+  heavy-automation proof is the only thing that works, mention that.
+- **Hints first when asked.** If I ask for a hint, give a hint: the next step,
+  the relevant Mathlib lemma, or the right tactic. Don't give the full proof.
+- **Verify before claiming success.** Check that the proof compiles (e.g.
+  `lake build` or `lake env lean <file>`) and report the actual result. Never
+  say a proof works if you haven't checked it. If you couldn't check it, say
+  so.
+- **No cheating.** Don't introduce `sorry`, `admit`, new `axiom`s, or
+  `native_decide` to close goals unless I explicitly ask for it.
+- **Name real lemmas only.** Don't make up Mathlib lemma names. Search Mathlib
+  (`exact?`, `apply?`, `rw?`, grepping `.lake/packages/mathlib`) or say you're
+  unsure.
+
+## Relationship to the informal solutions
+
+- `solutions.tex` is the source of truth for the math. Don't edit it unless I
+  ask.
+- If formalizing exposes a gap or error in a written solution, point it out
+  (citing the exercise number). Don't silently fix it in either place.
+- Mathlib often phrases things differently than Aluffi (e.g. via
+  `Function.Exact`, `Submodule`, `LinearMap.ker`, `CategoryTheory`). It's fine
+  to use Mathlib's idioms. When the translation isn't obvious, add a short
+  comment explaining how the Lean statement corresponds to the exercise.
+
+## Conventions
+
+- Organize Lean files by chapter under `AlgebraChapter0/`, import each new
+  file from `AlgebraChapter0.lean`, and put the exercise number in a
+  docstring on each theorem, e.g. `/-- Aluffi III.7.1 -/`.
+- Match the existing style of whatever file you're editing.
+- Don't add or upgrade dependencies (including bumping Mathlib or the Lean
+  toolchain) without asking.
+- Don't commit unless I ask.
