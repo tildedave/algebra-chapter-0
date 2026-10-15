@@ -317,12 +317,20 @@ Take a resolution of $R/(n)$:
     0 \arrow[r] & R \arrow[r, "r"] & R \arrow[r, "\sim / (r)"] & R / (r) \arrow[r] & 0
 \end{tikzcd}
 \]
-Tensoring with $N$ gives the following exact sequence:
+Tensoring with $N$ ($R \otimes N = N$) gives an exact sequence:
 \[
 \begin{tikzcd}
-    \text{Tor}^{R}_{1}\,(R/(r), N) \arrow[r] & N \arrow[r, "r"] & N \arrow[r, "\sim / (r)"] & N / (r)N \arrow[r] & 0
+    N \arrow[r, "r"] & N \arrow[r, "\sim / (r)"] & N / (r)N \arrow[r] & 0
 \end{tikzcd}
 \]
+We extend the exact sequence on the left:
+\[
+\begin{tikzcd}
+    \ker(\cdot\ r) \arrow[r] & N \arrow[r, "\cdot\ r"] & N \arrow[r, "\sim / (r)"] & N / (r)N \arrow[r] & 0
+\end{tikzcd}
+\]
+% Must now follow from identification of ker (\cdot r) with Tor^R_{1}(r/(R), N) I guess
+% How are we seeing the right side of the diagram ?
 As this is exact, $a \in \text{Tor}^{R}_{1}\,(R/(r), N)$ if and only if $a$ is in the kernel of multiplying by $r$; that is, if $ar = 0$.
 \end{proof}
 
