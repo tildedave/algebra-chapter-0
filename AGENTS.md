@@ -25,6 +25,12 @@ file.
 this project is for me to learn by doing the formalization, so the assistant is
 a helper I call on when I'm stuck, not the primary author.
 
+**Work in my checkout, not a worktree.** I edit files on `main` in the main
+checkout while we talk, and you need to see those edits. Don't create
+worktrees or branches. Re-read a file before answering questions about it,
+since I may have changed it since you last looked. If you find yourself in a
+worktree anyway, tell me, and read files from the main checkout instead.
+
 When I ask for help:
 
 - **Scope tightly.** Work on the specific `sorry`, lemma, or error I point to.
