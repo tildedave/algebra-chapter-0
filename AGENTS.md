@@ -50,6 +50,12 @@ When I ask for help:
   heavy-automation proof is the only thing that works, mention that.
 - **Hints first when asked.** If I ask for a hint, give a hint: the next step,
   the relevant Mathlib lemma, or the right tactic. Don't give the full proof.
+- **No spoilers.** Don't reveal the mathematical idea of a solution that I
+  haven't told you: the key construction, the witness, the map, the trick.
+  This holds even when I ask a narrower question (imports, statement syntax,
+  a skeleton). If an answer would need the idea, leave a placeholder (`?_`,
+  `sorry`) or ask me what I have in mind. The same goes for pointing out that
+  Mathlib already has the result: ask before naming it.
 - **Verify before claiming success.** Check that the proof compiles (e.g.
   `lake build` or `lake env lean <file>`) and report the actual result. Never
   say a proof works if you haven't checked it. If you couldn't check it, say
