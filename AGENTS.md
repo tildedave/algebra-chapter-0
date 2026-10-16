@@ -4,9 +4,10 @@ Guidance for AI assistants (Claude and others) working in this repository.
 
 ## What this repo is
 
-Solutions to exercises from Aluffi's *Algebra: Chapter 0*, written by hand in
-`solutions.tex` (compiled to `solutions.pdf`). We are beginning to formalize
-some of these solutions in Lean 4 (with Mathlib).
+Solutions to exercises from Aluffi's *Algebra: Chapter 0*. Many are written up
+in `solutions.tex` (compiled to `solutions.pdf`); others exist only in my paper
+notebook. We are beginning to formalize some of these solutions in Lean 4
+(with Mathlib).
 
 The Lean project lives in `algebra-chapter-0/`:
 
@@ -41,7 +42,8 @@ When I ask for help:
   say so and explain why, and let me decide.
 - **Explain the proof, not just the tactics.** Briefly say what the key idea
   is, which Mathlib lemmas you used and why, and how it lines up with the
-  informal argument in `solutions.tex`. A short explanation beats a long one.
+  informal argument (in `solutions.tex` if it's written up there). A short
+  explanation beats a long one.
 - **Prefer readable proofs.** Favor structured proofs (`have`, `obtain`,
   `calc`, `constructor`) that mirror the paper argument over opaque one-liners.
   Using `simp`, `aesop`, `omega`, `ring`, `linarith`, etc. is fine. If a
@@ -60,8 +62,11 @@ When I ask for help:
 
 ## Relationship to the informal solutions
 
-- `solutions.tex` is the source of truth for the math. Don't edit it unless I
-  ask.
+- `solutions.tex` is not a complete record: some solutions are only in my
+  paper notebook. If an exercise isn't in `solutions.tex`, don't assume it
+  hasn't been solved or invent an informal argument. Ask me how I solved it,
+  or work from what I tell you.
+- Don't edit `solutions.tex` unless I ask.
 - If formalizing exposes a gap or error in a written solution, point it out
   (citing the exercise number). Don't silently fix it in either place.
 - Mathlib often phrases things differently than Aluffi (e.g. via
